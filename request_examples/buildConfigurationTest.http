@@ -1,0 +1,83 @@
+GET http://{{host}}:8111/app/rest/builds/id:4
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic admin admin
+
+###
+### Constants
+@host = 192.168.100.18
+
+### Generated test data
+@projectId = {{$random.alphabetic(10)}}
+@buildTypeId = {{$random.alphabetic(10)}}
+
+### 1. Create project
+# @no-cookie-jar
+POST http://{{host}}:8111/app/rest/projects
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic admin admin
+
+{
+  "parentProject": {
+    "locator": "_Root"
+  },
+  "name": "name3",
+  "id": "id3",
+  "copyAllAssociatedSettings": true
+}
+
+### 2. Create build configuration
+# @no-cookie-jar
+POST http://{{host}}:8111/app/rest/buildTypes
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic admin admin
+
+{
+  "id": "buildId3",
+  "name": "Print hello world",
+  "project": {
+    "id": "id3"
+  },
+  "steps": {
+    "step": [
+      {
+        "name": "Print hello world",
+        "type": "simpleRunner",
+        "properties": {
+          "property": [
+            {
+              "name": "script.content",
+              "value": "echo 'Hello World!'"
+            },
+            {
+              "name": "teamcity.step.mode",
+              "value": "default"
+            },
+            {
+              "name": "use.custom.script",
+              "value": "true"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+
+### 3. Run build
+# @no-cookie-jar
+POST http://{{host}}:8111/app/rest/buildQueue
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic admin admin
+
+{
+  "buildType": {
+    "id": "buildId3"
+  }
+}
+
+
+
