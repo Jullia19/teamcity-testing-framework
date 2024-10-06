@@ -11,18 +11,7 @@ import org.apache.http.client.methods.RequestBuilder;
 
 public class Specifications {
 
-    private static Specifications spec;
-
-    private Specifications() {}
-
-    public static Specifications getSpec() {
-        if (spec == null) {
-            spec = new Specifications();
-        }
-        return spec;
-    }
-
-    private RequestSpecBuilder reqBuilder() {
+    private static RequestSpecBuilder reqBuilder() {
         RequestSpecBuilder requestBuilder = new RequestSpecBuilder();
         requestBuilder.addFilter(new RequestLoggingFilter());
         requestBuilder.addFilter(new ResponseLoggingFilter());
@@ -30,15 +19,22 @@ public class Specifications {
         requestBuilder.setAccept(ContentType.JSON);
         return requestBuilder;
     }
-    public RequestSpecification unauthSpec() {
+
+    public static RequestSpecification superUserAuth() {
+        var requestBuilder = reqBuilder();
+        requestBuilder.setBaseUri("http://%s:%s@%s/httpAuth".formatted("", Config.getProperty("superUserToken"), Config.getProperty("host")));
+        return requestBuilder.build();
+    }
+
+    public static RequestSpecification unauthSpec() {
         RequestSpecBuilder requestBuilder = reqBuilder();
         return requestBuilder.build();
 
     }
 
-    public RequestSpecification authSpec(User user) {
+    public static RequestSpecification authSpec(User user) {
         RequestSpecBuilder requestBuilder = reqBuilder();
-        requestBuilder.setBaseUri("http://" + user.getUsername() + ":" + user.getPassword() + "@" + Config.getProperty("host"));
+        requestBuilder.setBaseUri("http://%s:%s@%s".formatted(user.getUsername(), user.getPassword(), Config.getProperty("host")));
         return requestBuilder.build();
 
     }

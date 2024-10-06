@@ -1,7 +1,5 @@
 package com.example.teamcity.api.models;
 
-package com.example.teamcity.api.models;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Steps {
+public class Steps extends BaseModel {
     private Integer count;
     private List<Step> step;
 }
