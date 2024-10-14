@@ -5,7 +5,7 @@ Authorization: Basic admin admin
 
 ###
 ### Constants
-@host = 192.168.100.18
+@host = 192.168.1.101
 
 ### Generated test data
 @projectId = {{$random.alphabetic(10)}}
@@ -79,5 +79,25 @@ Authorization: Basic admin admin
   }
 }
 
+### 4. add a new role by this PUT request
+# @no-cookie-jar
+PUT http://{{host}}:8111/app/rest/users/id:40/roles
+Content-Type: application/json
+Accept: application/json
+
+{
+  "role": [
+    {
+      "roleId": "PROJECT_ADMIN",
+      "scope": "g"
+    }
+  ]
+}
 
 
+### 5. add a new role by this PUT request
+# @no-cookie-jar
+GET http://{{host}}:8111/app/rest/users/id:40/roles
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic test_qjpzMyVAip test_sSDJwNDCnD
