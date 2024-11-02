@@ -1,5 +1,6 @@
 package com.example.teamcity.api.models;
 
+
 import com.example.teamcity.api.annotations.Parameterizable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Steps extends BaseModel {
-    private Integer count;
+public class Properties extends BaseModel {
     @Parameterizable
-    private List<Step> step;
+    private List<Property> property;
 }

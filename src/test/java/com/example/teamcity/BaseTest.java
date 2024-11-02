@@ -1,4 +1,4 @@
-package com.example.teamcity.api;
+package com.example.teamcity;
 
 import com.example.teamcity.api.generators.TestDataStorage;
 import com.example.teamcity.api.models.TestData;
@@ -11,6 +11,7 @@ import org.testng.asserts.SoftAssert;
 import static com.example.teamcity.api.generators.TestDataGenerator.generate;
 
 public class BaseTest {
+    protected static final String REPO_URL = "https://github.com/AlexPshe/spring-core-for-qa";
     protected SoftAssert softy;
     protected CheckedRequests superUserCheckRequests = new CheckedRequests(Specifications.superUserAuth());
     protected TestData testData;
