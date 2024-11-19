@@ -5,7 +5,7 @@ Authorization: Basic admin admin
 
 ###
 ### Constants
-@host = 192.168.1.101
+@host = 192.168.0.104
 
 ### Generated test data
 @projectId = {{$random.alphabetic(10)}}
