@@ -50,6 +50,3 @@ public class Specifications {
     }
 }
 
-//curl http://192.168.0.103:8111/app/rest/swagger.json  > teamcity.json
-
-        //swagger-codegen-cli generate -i teamcity.json -l html -o .
