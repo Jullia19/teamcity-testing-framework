@@ -23,9 +23,6 @@ jobs:
       - name: Validate Checkstyle
         run: ./mvnw validate
 
-      - name: Make mvnw and all scripts executable
-        run: chmod -R +x ./
-
   run-tests:
     needs: validate-checkstyle
     runs-on: ubuntu-latest
@@ -40,6 +37,8 @@ jobs:
         # Указываем группу, чтобы не запустить тесты, связанные с сетапом TeamCity
         run: ./mvnw test -Dtest='com.example.teamcity.${{ inputs.package }}.**' -Dgroups=Regression
 
+      - name: Make mvnw and all scripts executable
+        run: --chmod=+x ./
         # Создаем репорт с покрытием API тестов, основанном на Swagger.
         # Документация: https://github.com/viclovsky/swagger-coverage
         # Обязательно добавить фильтр SwaggerCoverageRestAssured в RestAssured
