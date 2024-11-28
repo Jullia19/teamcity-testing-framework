@@ -46,7 +46,6 @@ public class Specifications {
         RequestSpecBuilder requestBuilder = reqBuilder();
         requestBuilder.setBaseUri("http://%s:%s@%s".formatted(user.getUsername(), user.getPassword(), Config.getProperty("host")));
         return requestBuilder.build();
-
     }
 }
 
