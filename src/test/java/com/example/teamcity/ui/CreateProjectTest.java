@@ -7,10 +7,12 @@ import com.example.teamcity.ui.pages.admin.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static io.qameta.allure.Allure.step;
+import java.time.Duration;
 
 @Test(groups = {"Regression"})
 public class CreateProjectTest extends BaseUiTest {
+
+    private static final Duration BASE_WAITING = Duration.ofSeconds(30); ;
 
     @Test(description = "User should be able to create project", groups = {"Positive"})
     public void userCreatesProject() {
@@ -27,7 +29,7 @@ public class CreateProjectTest extends BaseUiTest {
         // проверка состояния UI
         // (корректность считывания данных и отображение данных на UI)
         ProjectPage.open(createdProject.getId())
-                .title.shouldHave(Condition.exactText(testData.getProject().getName()));
+                .title.shouldBe(Condition.visible, BASE_WAITING).shouldHave(Condition.exactText(testData.getProject().getName()));
         var foundProjects = ProjectsPage.open()
                 .getProjects().stream()
                 .anyMatch(project -> project.getName().text().equals(testData.getProject().getName()));
