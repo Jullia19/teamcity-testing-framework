@@ -32,6 +32,7 @@ public class BaseUiTest extends BaseTest {
                 .includeSelenideSteps(true));
     }
 
+
     @AfterMethod(alwaysRun = true)
     public void closeWebDriver() {
         Selenide.closeWebDriver();
