@@ -43,6 +43,7 @@ public class CreateProjectTest extends BaseUiTest {
 
     @Test(description = "User should not be able to craete project without name", groups = {"Negative"})
     public void userCreatesProjectWithoutName() {
+
         loginAs(testData.getUser());
         var foundProjects = ProjectsPage.open()
                 .getProjects().size();
