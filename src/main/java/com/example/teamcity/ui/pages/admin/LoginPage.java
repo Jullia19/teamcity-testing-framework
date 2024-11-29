@@ -1,5 +1,6 @@
 package com.example.teamcity.ui.pages.admin;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.example.teamcity.api.models.User;
@@ -13,6 +14,7 @@ public class LoginPage extends BasePage {
     private SelenideElement inputUsername = $("#username");
     private SelenideElement inputPassword = $("#password");
     private SelenideElement inputSubmitLogin = $(".loginButton");
+    private SelenideElement icon = $(".ring-icon-icon");
 
     public SelenideElement inputSubmitLogin2 = $(".loginButton");
 
@@ -27,7 +29,7 @@ public class LoginPage extends BasePage {
         inputUsername.val(user.getUsername());
         inputPassword.val(user.getPassword());
         inputSubmitLogin.click();
-
+        icon.shouldBe(Condition.visible, BASE_WAITING);
         return Selenide.page(ProjectPage.class);
     }
 }
