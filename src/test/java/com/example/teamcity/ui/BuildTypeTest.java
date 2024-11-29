@@ -46,6 +46,7 @@ public class BuildTypeTest extends BaseUiTest {
         buildTypePage.open(testData.getProject().getId()).createForm(REPO_URL).setupBuildType(testData.getBuildType().getName());
         buildTypePage.clickSubmitAnywayButton();
         Assert.assertEquals(buildTypePage.getErrorText(),"Build configuration with name \""+ testData.getBuildType().getName() +"\" already exists in project: \"" + testData.getProject().getName() + "\"");
+
     }
 
 }
