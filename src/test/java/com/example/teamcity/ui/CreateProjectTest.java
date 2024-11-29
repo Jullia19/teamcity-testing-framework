@@ -33,7 +33,7 @@ public class CreateProjectTest extends BaseUiTest {
         // проверка состояния UI
         // (корректность считывания данных и отображение данных на UI)
         ProjectPage.open(createdProject.getId())
-                .title.shouldBe(Condition.visible, BASE_WAITING).shouldHave(Condition.exactText(testData.getProject().getName()));
+                .title.shouldHave(Condition.exactText(testData.getProject().getName()));
         var foundProjects2 = ProjectsPage.open()
                 .getProjects().stream()
                 .anyMatch(project -> project.getName().text().equals(testData.getProject().getName()));
