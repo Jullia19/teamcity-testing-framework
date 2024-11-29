@@ -14,13 +14,12 @@ public class CreateProjectPage extends CreateBasePage {
     private static SelenideElement errorMessage = $("#error_projectName");
 
     public static CreateProjectPage open(String projectId) {
-
+        Configuration.timeout = 10000;
         return Selenide.open(CREATE_URL.formatted(projectId, PROJECT_SHOW_MODE), CreateProjectPage.class);
     }
 
     public CreateProjectPage createForm(String url) {
         Configuration.timeout = 10000;
-
         baseCreateForm(url);
         return this;
     }

@@ -17,6 +17,7 @@ import java.util.Map;
 public class BaseUiTest extends BaseTest {
     @BeforeSuite(alwaysRun = true)
     public void setupUiTest() {
+        Configuration.timeout = 10000;
         Configuration.browser = Config.getProperty("browser");
         Configuration.baseUrl = "http://" + Config.getProperty("host");
         // НЕТ ПИШИТЕ UI ТЕСТЫ С ЛОКАЛЬНЫМ БРАУЗЕРОМ
