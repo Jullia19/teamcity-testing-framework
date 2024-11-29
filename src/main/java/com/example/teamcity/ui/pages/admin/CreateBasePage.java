@@ -14,8 +14,6 @@ public abstract class CreateBasePage extends BasePage {
     protected SelenideElement buildTypeNameInput = $("#buildTypeName");
     protected SelenideElement connectionSuccessfulMessage = $(".connectionSuccessful");
 
-
-
     protected void baseCreateForm(String url) {
         urlInput.should(Condition.appear, BASE_WAITING);
         urlInput.val(url);
