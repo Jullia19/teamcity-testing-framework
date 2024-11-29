@@ -19,6 +19,8 @@ public class CreateProjectTest extends BaseUiTest {
         // подготовка окружения
         loginAs(testData.getUser());
         // взаимодействие с UI
+        var foundProjects = ProjectsPage.open()
+                .getProjects().size();
         CreateProjectPage.open("_Root")
                 .createForm(REPO_URL)
                 .setupProject(testData.getProject().getName(), testData.getBuildType().getName());
@@ -30,10 +32,10 @@ public class CreateProjectTest extends BaseUiTest {
         // (корректность считывания данных и отображение данных на UI)
         ProjectPage.open(createdProject.getId())
                 .title.shouldBe(Condition.visible, BASE_WAITING).shouldHave(Condition.exactText(testData.getProject().getName()));
-        var foundProjects = ProjectsPage.open()
+        var foundProjects2 = ProjectsPage.open()
                 .getProjects().stream()
                 .anyMatch(project -> project.getName().text().equals(testData.getProject().getName()));
-        softy.assertTrue(foundProjects);
+        softy.assertTrue(foundProjects2);
 
     }
 
