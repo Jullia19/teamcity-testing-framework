@@ -38,7 +38,6 @@ public class BuildTypeTest extends BaseUiTest {
         loginAs(testData.getUser());
         var userCheckRequests = new CheckedRequests(Specifications.authSpec(testData.getUser()));
         userCheckRequests.<Project>getRequest(PROJECT).create(testData.getProject());
-
         buildTypePage.open(testData.getProject().getId()).createForm(REPO_URL).setupBuildType(testData.getBuildType().getName());
         var createdBuildType = superUserCheckRequests.<BuildType>getRequest(Endpoint.BUILD_TYPES).read("name:" + testData.getBuildType().getName());
         softy.assertNotNull(createdBuildType);
