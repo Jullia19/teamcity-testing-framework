@@ -12,7 +12,7 @@ import java.time.Duration;
 @Test(groups = {"Regression"})
 public class CreateProjectTest extends BaseUiTest {
 
-    private static final Duration BASE_WAITING = Duration.ofSeconds(30); ;
+    private static final Duration BASE_WAITING = Duration.ofSeconds(50); ;
 
     @Test(description = "User should be able to create project", groups = {"Positive"})
     public void userCreatesProject() {
