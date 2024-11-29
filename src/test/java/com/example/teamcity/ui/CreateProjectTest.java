@@ -22,6 +22,8 @@ public class CreateProjectTest extends BaseUiTest {
         var foundProjects = ProjectsPage.open()
                 .getProjects().size();
         CreateProjectPage.open("_Root")
+                .createForm(REPO_URL);
+        CreateProjectPage.open("_Root")
                 .createForm(REPO_URL)
                 .setupProject(testData.getProject().getName(), testData.getBuildType().getName());
         // проверка состояния API

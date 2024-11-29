@@ -20,6 +20,7 @@ public class CreateProjectPage extends CreateBasePage {
 
     public CreateProjectPage createForm(String url) {
         Configuration.timeout = 10000;
+
         baseCreateForm(url);
         return this;
     }
