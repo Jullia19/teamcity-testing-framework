@@ -30,6 +30,7 @@ public class BuildTypeTest extends BaseUiTest {
         // (корректность считывания данных и отображение данных на UI)
         ProjectPage.open(testData.getProject().getId())
                 .buildType.shouldHave(Condition.exactText(testData.getBuildType().getName()));
+
     }
 
     @Test(description = "User should not be able to create build type with the same name", groups = {"Negative"})
