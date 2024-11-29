@@ -1,5 +1,6 @@
 package com.example.teamcity.ui.pages.admin;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
@@ -18,6 +19,7 @@ public class CreateProjectPage extends CreateBasePage {
     }
 
     public CreateProjectPage createForm(String url) {
+        Configuration.timeout = 10000;
         baseCreateForm(url);
         return this;
     }
