@@ -15,6 +15,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import java.util.Map;
 
 public class BaseUiTest extends BaseTest {
+
     @BeforeSuite(alwaysRun = true)
     public void setupUiTest() {
         Configuration.timeout = 10000;
