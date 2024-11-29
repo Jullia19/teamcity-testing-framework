@@ -35,6 +35,7 @@ public class BuildTypeTest extends BaseUiTest {
 
     @Test(description = "User should not be able to create build type with the same name", groups = {"Negative"})
     public void userCreatesBuildTypeWithTheSameName() {
+
         CreateBuildTypePage buildTypePage = new CreateBuildTypePage();
         loginAs(testData.getUser());
         var userCheckRequests = new CheckedRequests(Specifications.authSpec(testData.getUser()));
