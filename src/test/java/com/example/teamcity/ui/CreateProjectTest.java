@@ -7,16 +7,22 @@ import com.example.teamcity.ui.pages.admin.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static io.qameta.allure.Allure.step;
+import java.time.Duration;
 
 @Test(groups = {"Regression"})
 public class CreateProjectTest extends BaseUiTest {
+
+    //private static final Duration BASE_WAITING = Duration.ofSeconds(50); ;
 
     @Test(description = "User should be able to create project", groups = {"Positive"})
     public void userCreatesProject() {
         // подготовка окружения
         loginAs(testData.getUser());
         // взаимодействие с UI
+        var foundProjects = ProjectsPage.open()
+                .getProjects().size();
+        CreateProjectPage.open("_Root")
+                .createForm(REPO_URL);
         CreateProjectPage.open("_Root")
                 .createForm(REPO_URL)
                 .setupProject(testData.getProject().getName(), testData.getBuildType().getName());
@@ -28,17 +34,15 @@ public class CreateProjectTest extends BaseUiTest {
         // (корректность считывания данных и отображение данных на UI)
         ProjectPage.open(createdProject.getId())
                 .title.shouldHave(Condition.exactText(testData.getProject().getName()));
-        var foundProjects = ProjectsPage.open()
+        var foundProjects2 = ProjectsPage.open()
                 .getProjects().stream()
                 .anyMatch(project -> project.getName().text().equals(testData.getProject().getName()));
-        softy.assertTrue(foundProjects);
-
+        softy.assertTrue(foundProjects2);
 
     }
 
     @Test(description = "User should not be able to craete project without name", groups = {"Negative"})
     public void userCreatesProjectWithoutName() {
-
         loginAs(testData.getUser());
         var foundProjects = ProjectsPage.open()
                 .getProjects().size();

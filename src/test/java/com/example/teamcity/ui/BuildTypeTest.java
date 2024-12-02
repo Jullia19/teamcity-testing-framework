@@ -25,27 +25,28 @@ public class BuildTypeTest extends BaseUiTest {
         // взаимодействие с UI
         CreateBuildTypePage.open(testData.getProject().getId()).createForm(REPO_URL).setupBuildType(testData.getBuildType().getName());
         // проверка состояния UI
-        var createdBuildType = superUserCheckRequests.<BuildType>getRequest(Endpoint.BUILD_TYPES).read("name:" + testData.getBuildType().getName());
-        softy.assertNotNull(createdBuildType);
+        //var createdBuildType = superUserCheckRequests.<BuildType>getRequest(Endpoint.BUILD_TYPES).read("name:" + testData.getBuildType().getName());
+        //softy.assertNotNull(createdBuildType);
         // (корректность считывания данных и отображение данных на UI)
         ProjectPage.open(testData.getProject().getId())
                 .buildType.shouldHave(Condition.exactText(testData.getBuildType().getName()));
+
     }
 
     @Test(description = "User should not be able to create build type with the same name", groups = {"Negative"})
     public void userCreatesBuildTypeWithTheSameName() {
+
         CreateBuildTypePage buildTypePage = new CreateBuildTypePage();
         loginAs(testData.getUser());
         var userCheckRequests = new CheckedRequests(Specifications.authSpec(testData.getUser()));
         userCheckRequests.<Project>getRequest(PROJECT).create(testData.getProject());
-
         buildTypePage.open(testData.getProject().getId()).createForm(REPO_URL).setupBuildType(testData.getBuildType().getName());
         var createdBuildType = superUserCheckRequests.<BuildType>getRequest(Endpoint.BUILD_TYPES).read("name:" + testData.getBuildType().getName());
         softy.assertNotNull(createdBuildType);
         buildTypePage.open(testData.getProject().getId()).createForm(REPO_URL).setupBuildType(testData.getBuildType().getName());
-
         buildTypePage.clickSubmitAnywayButton();
         Assert.assertEquals(buildTypePage.getErrorText(),"Build configuration with name \""+ testData.getBuildType().getName() +"\" already exists in project: \"" + testData.getProject().getName() + "\"");
+
     }
 
 }

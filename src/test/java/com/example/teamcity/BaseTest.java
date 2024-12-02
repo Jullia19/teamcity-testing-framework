@@ -18,14 +18,19 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void beforeTest() {
+
         softy = new SoftAssert();
         testData = generate();
+
     }
 
     @AfterMethod(alwaysRun = true)
     public void afterTest() {
+
         softy.assertAll();
         TestDataStorage.getStorage().deleteCreatedEntities();
+
     }
+
 
 }
